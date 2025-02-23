@@ -14,7 +14,7 @@ struct ContentView: View {
     @State private var unitTwo = "Hours"
     @FocusState private var inputIsFocused: Bool
 
-    let timeUnits = ["Hours", "Minutes", "Seconds", "Days"]
+    let timeUnits = ["Seconds", "Minutes", "Hours", "Days"]
 
     func convertToSeconds(input: Double) -> Double {
         switch unitOne {
@@ -51,25 +51,26 @@ struct ContentView: View {
             
             Form {
                 Section {
+                    // Input
                     TextField(
                         "Time to convert", value: $input, format: .number
                     )
                     .keyboardType(.decimalPad)
                     .focused($inputIsFocused)
-
+                    // From
                     Picker("From", selection: $unitOne) {
                         ForEach(timeUnits, id: \.self) {
                             Text("\($0)")
                         }
                     }
-
+                    // To
                     Picker("To", selection: $unitTwo) {
                         ForEach(timeUnits, id: \.self) {
                             Text("\($0)")
                         }
                     }
                 }
-
+                // Output
                 Section("Output") {
                     Text(convertedValue, format: .number)
                 }
